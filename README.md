@@ -109,13 +109,13 @@ This project is for learning and authorized testing only.
 Do not use against systems you don't own or have permission to test.
 ---
 
-#👨‍💻 Team Credits
-Module	Contributor
-XSS Payloads	Osama
-SQLi Payloads & Evasion	Hafsa & Abdul Haseeb
-CMDi Payloads	Unaiza
-Encoders (Base64, Hex, etc.)	Hira
-Obfuscation & Final Integration	Ameer
+👨‍💻 Team Credits
+Module	Contributor.
+XSS Payloads	Osama.
+SQLi Payloads & Evasion	Hafsa & Abdul Haseeb.
+CMDi Payloads	Unaiza.
+Encoders (Base64, Hex, etc.)	Hira.
+Obfuscation & Final Integration	Ameer.
 
 ---
 📬 Questions or Contributions?
