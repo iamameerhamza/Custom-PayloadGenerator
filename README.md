@@ -58,23 +58,22 @@ chmod +x demo.sh
 ---
 
 🚀 Example Commands
-```
-bash
-Copy
-Edit
-```
+
 # Generate XSS payloads
-```./demo.sh --xss
+```
+./demo.sh --xss
 ```
 # SQLi union-based payloads with evasion
 ```
 ./demo.sh --sqli --sqli-type union --sqli-evasion
 ```
 # CMDi payloads with hex encoding
-```./demo.sh --cmdi --encode hex
+```
+./demo.sh --cmdi --encode hex
 ```
 # XSS payloads with obfuscation, saved to a file
-```./demo.sh --xss --obfuscate --output xss_payloads.txt
+```
+./demo.sh --xss --obfuscate --output xss_payloads.txt
 ```
 ---
 ##⚙️ Full Options Breakdown
@@ -107,7 +106,7 @@ Unit test coverage for stability
 ⚠️ Disclaimer
 This project is for learning and authorized testing only.
 Do not use against systems you don't own or have permission to test.
----
+
 
 👨‍💻 Team Credits
 Module	Contributor.
