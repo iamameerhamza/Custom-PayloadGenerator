@@ -76,7 +76,7 @@ chmod +x demo.sh
 ./demo.sh --xss --obfuscate --output xss_payloads.txt
 ```
 ---
-⚙️ Full Options Breakdown
+##⚙️ Full Options Breakdown
 
 Option	Description
 ```
@@ -91,7 +91,8 @@ Option	Description
 --clipboard	Copy payloads to clipboard
 ```
 ---
-💡 Future Ideas
+##💡 Future Ideas
+---
 Burp Suite extension version
 
 GUI for easy, click-based payload generation
@@ -104,12 +105,12 @@ Unit test coverage for stability
 
 ---
 
-⚠️ Disclaimer
+##⚠️ Disclaimer
+
 This project is for learning and authorized testing only.
 Do not use against systems you don't own or have permission to test.
 
-
-👨‍💻 Team Credits
+##👨‍💻 Team Credits
 ```
 Module	Contributor.
 XSS Payloads	                Osama.
