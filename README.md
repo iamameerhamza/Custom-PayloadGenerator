@@ -59,19 +59,19 @@ chmod +x demo.sh
 
 🚀 Example Commands
 
-# Generate XSS payloads
+## Generate XSS payloads
 ```
 ./demo.sh --xss
 ```
-# SQLi union-based payloads with evasion
+## SQLi union-based payloads with evasion
 ```
 ./demo.sh --sqli --sqli-type union --sqli-evasion
 ```
-# CMDi payloads with hex encoding
+## CMDi payloads with hex encoding
 ```
 ./demo.sh --cmdi --encode hex
 ```
-# XSS payloads with obfuscation, saved to a file
+## XSS payloads with obfuscation, saved to a file
 ```
 ./demo.sh --xss --obfuscate --output xss_payloads.txt
 ```
