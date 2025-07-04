@@ -1,45 +1,62 @@
 import random
 import re
 
+# List of common keywords attackers may try to bypass filters for
+KEYWORDS = ['script', 'alert', 'onerror', 'img', 'svg', 'iframe']
+
 def obfuscate(payload):
     """
-    Apply random obfuscation technique to a payload.
+    Apply layered obfuscation to a payload:
+    - Keyword splitting
+    - Comment injection
+    - Random case switching
+    - Random whitespace manipulation
+    - Character encoding
     """
-    techniques = [
-        _add_comments,
-        _case_randomization,
-        _whitespace_manipulation,
-        _character_encoding
-    ]
-    technique = random.choice(techniques)
-    return technique(payload)
+    payload = _split_keywords(payload, KEYWORDS)
+    payload = _add_comments(payload)
+    payload = _random_case(payload)
+    payload = _whitespace_manipulation(payload)
+    payload = _character_encoding(payload)
+    return payload
+
 
 # Obfuscation Techniques
 
+def _split_keywords(payload, keywords):
+    """
+    Split keywords by injecting random characters or comments.
+    """
+    for kw in keywords:
+        if kw.lower() in payload.lower():
+            injection = random.choice(['/**/', '%20', '', '\t'])
+            parts = list(kw)
+            obfuscated_kw = injection.join(parts)
+            pattern = re.compile(re.escape(kw), re.IGNORECASE)
+            payload = pattern.sub(obfuscated_kw, payload)
+    return payload
+
 def _add_comments(payload):
     """
-    Randomly insert comments into HTML tags.
+    Randomly insert comments inside HTML tags.
     """
-    return re.sub(r'(<[^>]+)', r'\1/*{}*/'.format(_random_string(4)), payload)
+    return re.sub(r'(<[^>]+)', lambda m: m.group(1) + f'/*{_random_string(4)}*/', payload)
 
-def _case_randomization(payload):
+def _random_case(payload):
     """
-    Randomize casing of HTML tags and attributes.
+    Randomize casing of characters within tags and payload.
     """
-    def random_case(match):
-        return ''.join(c.upper() if random.random() > 0.5 else c.lower() for c in match.group(0))
-    
-    return re.sub(r'<[^>]+>', random_case, payload)
+    return ''.join(c.upper() if random.random() > 0.5 else c.lower() for c in payload)
 
 def _whitespace_manipulation(payload):
     """
-    Insert random whitespace characters.
+    Insert random whitespace characters throughout the payload.
     """
     return payload.replace(' ', random.choice([' ', '\t', '/**/', '\n']))
 
 def _character_encoding(payload):
     """
-    Replace specific characters with HTML entity equivalents.
+    Replace key characters with HTML entity equivalents.
     """
     encodings = {
         '<': '&lt;',
@@ -49,7 +66,8 @@ def _character_encoding(payload):
     }
     return ''.join(encodings.get(c, c) for c in payload)
 
-# Helper
+
+# Helper Function
 
 def _random_string(length):
     """
