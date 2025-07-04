@@ -119,11 +119,10 @@ Encoders (Base64,etc.)	        Hira.
 Obfuscation & Integration	Ameer.
 ```
 
-
-📬 Questions or Contributions?
-
+## 📬 Questions or Contributions?
 Feel free to fork this project or submit a pull request!
 For questions or suggestions, contact:
+
 [https://github.com/iamameerhamza]
 ---
 ## 🙌 **Credits**
