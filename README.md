@@ -43,19 +43,19 @@ payload_generator/
 ├── requirements.txt # Dependencies
 └── README.md # This file
 
-yaml
-Copy
-Edit
-
 ---
 
 ## 🛠️ Quick Start
 
 Make sure Python 3 is installed, then run:
 
-```bash
-pip install -r requirements.txt
+bash
+
+```pip install -r requirements.txt
 chmod +x demo.sh
+```
+---
+
 🚀 Example Commands
 bash
 Copy
