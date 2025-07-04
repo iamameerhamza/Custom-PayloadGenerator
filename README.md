@@ -104,22 +104,24 @@ Unit test coverage for stability
 
 ---
 
-##⚠️ Disclaimer
+⚠️ Disclaimer
 This project is for learning and authorized testing only.
 Do not use against systems you don't own or have permission to test.
 ---
-👨‍💻 Team Credits
+
+#👨‍💻 Team Credits
 Module	Contributor
 XSS Payloads	Osama
 SQLi Payloads & Evasion	Hafsa & Abdul Haseeb
 CMDi Payloads	Unaiza
 Encoders (Base64, Hex, etc.)	Hira
 Obfuscation & Final Integration	Ameer
+
 ---
-##📬 Questions or Contributions?
+📬 Questions or Contributions?
 Feel free to fork this project or submit a pull request!
 For questions or suggestions, contact:
-[Your Email or GitHub Link]
+[https://github.com/iamameerhamza]
 ---
 ## 🙌 **Credits**
 Created with ❤️ by **TEAM NEBULA**
