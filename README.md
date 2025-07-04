@@ -112,15 +112,16 @@ Do not use against systems you don't own or have permission to test.
 👨‍💻 Team Credits
 ```
 Module	Contributor.
-XSS Payloads	Osama.
-SQLi Payloads & Evasion	Hafsa & Abdul Haseeb.
-CMDi Payloads	Unaiza.
-Encoders (Base64, Hex, etc.)	Hira.
-Obfuscation & Final Integration	Ameer.
+XSS Payloads	                Osama.
+SQLi Payloads & Evasion	        Hafsa & Abdul Haseeb.
+CMDi Payloads	                Unaiza.
+Encoders (Base64,etc.)	        Hira.
+Obfuscation & Integration	Ameer.
 ```
----
+
+
 📬 Questions or Contributions?
----
+
 Feel free to fork this project or submit a pull request!
 For questions or suggestions, contact:
 [https://github.com/iamameerhamza]
