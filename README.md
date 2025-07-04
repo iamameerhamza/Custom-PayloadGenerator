@@ -33,6 +33,7 @@ This project is intended for **educational use and authorized testing only**.
 ---
 
 ## 🗂️ Project Structure (Simplified)
+```
 
 payload_generator/
 ├── payload_gen.py # Main program
@@ -42,7 +43,7 @@ payload_generator/
 ├── demo.sh # Quick-run script
 ├── requirements.txt # Dependencies
 └── README.md # This file
-
+```
 ---
 
 ## 🛠️ Quick Start
@@ -57,23 +58,28 @@ chmod +x demo.sh
 ---
 
 🚀 Example Commands
+```
 bash
 Copy
 Edit
+```
 # Generate XSS payloads
-./demo.sh --xss
-
+```./demo.sh --xss
+```
 # SQLi union-based payloads with evasion
+```
 ./demo.sh --sqli --sqli-type union --sqli-evasion
-
+```
 # CMDi payloads with hex encoding
-./demo.sh --cmdi --encode hex
-
+```./demo.sh --cmdi --encode hex
+```
 # XSS payloads with obfuscation, saved to a file
-./demo.sh --xss --obfuscate --output xss_payloads.txt
+```./demo.sh --xss --obfuscate --output xss_payloads.txt
+```
 ---
-⚙️ Full Options Breakdown
+##⚙️ Full Options Breakdown
 Option	Description
+```
 --xss	Generate XSS payloads
 --sqli	Generate SQLi payloads
 --sqli-type [TYPE]	SQLi category: all, auth, union, error, bool, time
@@ -83,6 +89,7 @@ Option	Description
 --obfuscate	Apply layered obfuscation
 --output [FILE]	Save payloads to file (.txt or .json)
 --clipboard	Copy payloads to clipboard
+```
 ---
 💡 Future Ideas
 Burp Suite extension version
@@ -97,7 +104,7 @@ Unit test coverage for stability
 
 ---
 
-⚠️ Disclaimer
+##⚠️ Disclaimer
 This project is for learning and authorized testing only.
 Do not use against systems you don't own or have permission to test.
 ---
@@ -109,7 +116,7 @@ CMDi Payloads	Unaiza
 Encoders (Base64, Hex, etc.)	Hira
 Obfuscation & Final Integration	Ameer
 ---
-📬 Questions or Contributions?
+##📬 Questions or Contributions?
 Feel free to fork this project or submit a pull request!
 For questions or suggestions, contact:
 [Your Email or GitHub Link]
